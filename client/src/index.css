@@ -79,3 +79,46 @@ button {
   color: #e50914;
   margin-bottom: 1rem;
 }
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.detail button {
+  background: transparent;
+  border: 1px solid #333;
+  margin-bottom: 2rem;
+}
+
+.detail-content {
+  display: flex;
+  gap: 2rem;
+}
+
+.detail-content img {
+  width: 300px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-info p {
+  color: #ccc;
+  line-height: 1.6;
+}
