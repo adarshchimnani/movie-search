@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { use } from 'react'
+import { useState, useEffect, useRef } from 'react';
 import MovieCard from './MovieCard';
 import SearchBar from './SearchBar';
 
@@ -8,17 +8,29 @@ const App = () => {
   const [title, setTitle] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);;
+  const [error, setError] = useState(null);; ""
 
-  const searchMovies = async () => {
-    if (!title)
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    searchMovies("Batman");
+  }, []);
+
+  const searchMovies = async (query) => {
+    const searchTerm = query || title;
+
+    if (!searchTerm)
       return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3001/search?title=${title}`);
+      const response = await fetch(`http://localhost:3001/search?title=${searchTerm}`);
       const data = await response.json();
 
       if (data.Response === "True") {
@@ -43,6 +55,7 @@ const App = () => {
         title={title}
         onTitleChange={setTitle}
         onSearch={searchMovies}
+        inputRef={inputRef}
       />
 
       {/* {loading && <p>Loading...</p>}

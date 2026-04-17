@@ -1,7 +1,8 @@
-export default function SearchBar({ title, onTitleChange, onSearch }) {
+export default function SearchBar({ title, onTitleChange, onSearch, inputRef }) {
     return (
         <div className='search-bar'>
             <input
+                ref={inputRef}
                 type="text"
                 placeholder="Enter movie title..."
                 value={title}
