@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import MovieCard from './MovieCard';
+import SearchBar from './SearchBar';
 
 const App = () => {
 
@@ -37,28 +39,23 @@ const App = () => {
     <div className="container">
       <h1>Movie Search</h1>
 
-      <div className='search-bar'>
-        <input
-          type="text"
-          placeholder="Enter movie title..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && searchMovies()}
-        />
-        <button onClick={searchMovies}>Search</button>
-      </div>
+      <SearchBar
+        title={title}
+        onTitleChange={setTitle}
+        onSearch={searchMovies}
+      />
 
       {/* {loading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>} */}
 
       <div className="grid">
         {movies.map((movie) => (
-          <div key={movie.imdbID} className="movie-card">
-            <img src={movie.Poster !== 'N/A' ? movie.Poster : 'http://via.placeholder.com/150x220?text=No+Image'}
-              alt={movie.Title} />
-            <h3>{movie.Title}</h3>
-            <p>{movie.Year}</p>
-          </div>
+          <MovieCard
+            key={movie.imdbID}
+            title={movie.Title}
+            year={movie.Year}
+            poster={movie.Poster}
+          />
         ))}
       </div>
     </div>
